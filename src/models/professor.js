@@ -10,15 +10,7 @@ const schema = new Schema({
         type : Number,
         required : true
     },
-    Comentarios: [{
-        type: String,
-        required : true
-    }],
     NOME : {
-        type: String,
-        required : true
-    },
-    Provas_antigas : {
         type: String,
         required : true
     },
@@ -31,7 +23,13 @@ const schema = new Schema({
     },
     unidade : {
         type: String,
-    }
+    },
+    Comentarios_Quantidade : {
+        type: Number,
+    },
+    materias: [{
+        type: String,
+    }],
 })
 
 module.exports = mongoose.model('Professor', schema)
