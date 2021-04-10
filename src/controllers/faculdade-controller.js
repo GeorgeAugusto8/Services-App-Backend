@@ -16,7 +16,7 @@ exports.get = (req, res, next) => {
 }
 
 exports.getUnidades = (req, res, next) => {
-    repository.getUnidades(req.body)
+    repository.getUnidades(req.params)
         .then(data => {
             res.status('200').send({
                 data: data

@@ -1,7 +1,7 @@
 const repository = require('../repositories/professor-repository')
 
 exports.get = (req, res, next) => {
-    repository.get(req.body)
+    repository.get(req.params)
         .then(data => {
             res.status('200').send({
                 data: data
@@ -36,12 +36,12 @@ exports.put = (req, res, next) => {
 }
 
 exports.getComentarios = (req, res, next) => {
-    if (!(req.body.ProfessorID)) {
+    if (!(req.params.ProfessorID)) {
         res.status('400').send({
             data: 'Dados inválidos.'
         })
     }
-    repository.getComentarios(req.body)
+    repository.getComentarios(req.params)
         .then(data => {
             res.status('200').send({
                 data: data
@@ -79,12 +79,12 @@ exports.postComentario = (req, res, next) => {
 }
 
 exports.getProvas = (req, res, next) => {
-    if (!req.body.ProfessorID ) {
+    if (!req.params.ProfessorID ) {
         res.status('400').send({
             data: 'Dados inválidos.'
         })
     }
-    repository.getProvas(req.body)
+    repository.getProvas(req.params)
         .then(data => {
             res.status('200').send({
                 data: data
