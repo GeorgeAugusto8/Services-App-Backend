@@ -1,7 +1,9 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-var cors = require('cors')
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const config = require('./config');
+const path = require('path');
 
 const app = express()
 
@@ -10,20 +12,18 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-mongoose.connect(`${process.env.DATABASE_URI}&w=majority`)
+mongoose.connect(config.connectionString,  { useNewUrlParser: true })
 
-const Professor = require('./models/professor')
-const Faculdade = require('./models/faculdade')
-const Unidade = require('./models/unidade')
-const Comentario = require('./models/comentario')
-const Prova = require('./models/prova')
+const Client = require('./models/Client')
+const ServiceProvider = require('./models/ServiceProvider')
+const Post = require('./models/Post')
 
-const indexRoute = require('./routes/index')
-const professoresRoute = require('./routes/professores')
-const faculdadesRoute = require('./routes/faculdades')
+const authRoute = require('./routes/auth')
+const postsRoute = require('./routes/posts')
+const usersRoute = require('./routes/users')
 
-app.use('/', indexRoute)
-app.use('/professores', professoresRoute)
-app.use('/faculdades', faculdadesRoute)
+app.use('/auth', authRoute)
+app.use('/posts', postsRoute)
+app.use('/users', usersRoute)
 
 module.exports = app
